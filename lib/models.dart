@@ -7,7 +7,7 @@ class OfferModel {
 
 class ShopCategoryModel {
   final String name;
-  final String image;
+  final String imagePath;
 
-  const ShopCategoryModel({this.name, this.image});
+  const ShopCategoryModel({this.name, this.imagePath});
 }

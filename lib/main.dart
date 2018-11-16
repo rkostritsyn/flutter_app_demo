@@ -51,8 +51,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
 
   void navigationTapped(int page) {
-    // Animating to the page.
-    // You can use whatever duration and curve you like
     _pageController.animateToPage(page,
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
