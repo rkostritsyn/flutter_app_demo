@@ -2,29 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_demo/models.dart';
 import 'package:flutter_app_demo/product_showcase.dart';
+import 'package:flutter_app_demo/repo.dart';
 import 'package:flutter_app_demo/styles.dart';
 import 'package:logging/logging.dart';
 
 final Logger log = new Logger('ProductShowCase');
 
 class Store extends StatelessWidget {
-  final categoryList = [
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-    new ShopCategoryModel(name: "home", imagePath: 'assets/home.png'),
-  ];
 
   Store(this.listType);
 
@@ -32,12 +16,14 @@ class Store extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var categories = new Repo().getCategoriesList();
+
     return new Scaffold(
         body: new ListView.builder(
-      itemCount: categoryList.length,
+      itemCount: categories.length,
       itemBuilder: (BuildContext ctx, index) {
         return ListItemCategory(
-          category: categoryList[index],
+          category: categories[index],
         );
       },
     ));

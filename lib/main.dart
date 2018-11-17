@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primaryColor: Colors.red,
         primaryColorDark: Colors.red,
-        accentColor: const Color(0xFFFFAD32),
+        accentColor: Colors.red,
       ),
       home: new DashboardScreen(title: 'Home Screen'),
 

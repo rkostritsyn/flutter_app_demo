@@ -11,3 +11,13 @@ class ShopCategoryModel {
 
   const ShopCategoryModel({this.name, this.imagePath});
 }
+
+class ProductModel {
+  final String name;
+  final String descr;
+  final String imagePath;
+  final bool isInWishList;
+  final String price;
+
+  const ProductModel({this.name, this.descr, this.imagePath, this.isInWishList, this.price});
+}
