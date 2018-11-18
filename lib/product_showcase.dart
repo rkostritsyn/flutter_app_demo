@@ -112,7 +112,7 @@ class ProductPreviewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var categoryAsset = new AssetImage(productPreview.imagePath);
+    var categoryAsset = new AssetImage(productPreview.priviewImagePath);
     return Container(
         child: new GestureDetector(
             onTap: () {

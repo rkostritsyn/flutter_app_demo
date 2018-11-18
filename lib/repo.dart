@@ -24,19 +24,26 @@ class Repo {
   }
 
   final productList = [
-    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast', price: "UA 220.00", isInWishList: false, imagePath: 'assets/product_preview.png'),
-    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast', price: "UA 220.00", isInWishList: false, imagePath: 'assets/product_preview.png'),
-    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast', price: "UA 220.00", isInWishList: false, imagePath: 'assets/product_preview.png'),
-    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast', price: "UA 220.00", isInWishList: false, imagePath: 'assets/product_preview.png'),
-    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast', price: "UA 220.00", isInWishList: false, imagePath: 'assets/product_preview.png'),
-    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast', price: "UA 220.00", isInWishList: false, imagePath: 'assets/product_preview.png'),
-    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast', price: "UA 220.00", isInWishList: false, imagePath: 'assets/product_preview.png'),
-    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast', price: "UA 220.00", isInWishList: false, imagePath: 'assets/product_preview.png'),
+    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast',
+        price: "UA 220.00", isInWishList: false, priviewImagePath: 'assets/product_preview.png', imagePathList: ['assets/product_preview.png']),
+    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast',
+        price: "UA 220.00", isInWishList: false, priviewImagePath: 'assets/product_preview.png', imagePathList: ['assets/product_preview.png']),
+    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast',
+        price: "UA 220.00", isInWishList: false, priviewImagePath: 'assets/product_preview.png', imagePathList: ['assets/product_preview.png']),
+    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast',
+        price: "UA 220.00", isInWishList: false, priviewImagePath: 'assets/product_preview.png', imagePathList: ['assets/product_preview.png']),
+    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast',
+        price: "UA 220.00", isInWishList: false, priviewImagePath: 'assets/product_preview.png', imagePathList: ['assets/product_preview.png']),
+    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast',
+        price: "UA 220.00", isInWishList: false, priviewImagePath: 'assets/product_preview.png', imagePathList: ['assets/product_preview.png']),
+    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast',
+        price: "UA 220.00", isInWishList: false, priviewImagePath: 'assets/product_preview.png', imagePathList: ['assets/product_preview.png']),
+    new ProductModel(name: 'Calvin Kline', descr: 'Mens 3/4 Length Coast',
+        price: "UA 220.00", isInWishList: false, priviewImagePath: 'assets/product_preview.png', imagePathList: ['assets/product_preview.png']),
   ];
 
   List<ProductModel> getProductLis() {
     return productList;
   }
-
 
 }

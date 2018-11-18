@@ -9,3 +9,4 @@ const TextStyle h2 = TextStyle(color: Colors.black, fontWeight: FontWeight.w500,
 const cardInnerMargin = EdgeInsets.all(10);
 
 const cardOuterMargin = EdgeInsets.symmetric(horizontal: 10, vertical: 5);
+
