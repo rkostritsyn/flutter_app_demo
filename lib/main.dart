@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_demo/bag.dart';
-import 'package:flutter_app_demo/home_screen.dart';
+import 'package:flutter_app_demo/home_screen/home_screen.dart';
 import 'package:flutter_app_demo/search.dart';
+import 'package:flutter_app_demo/shop.dart';
 import 'package:flutter_app_demo/store.dart';
 
 void main() => runApp(new MyApp());
@@ -77,17 +78,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
         children: [
           new HomeScreen("Home screen"),
           new Store("Location screen"),
-          new Bag("Friends screen"),
+          new Shop(),
+          new Bag("BAG"),
+
         ],
         onPageChanged: onPageChanged,
         controller: _pageController,
       ),
       bottomNavigationBar: new Theme(
+
         data: Theme.of(context).copyWith(
           // sets the background color of the `BottomNavigationBar`
           canvasColor: Colors.white,
         ), // sets the inactive color of the `BottomNavigationBar`
         child: new BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+
           items: [
             new BottomNavigationBarItem(
                 icon: new Icon(
@@ -102,11 +108,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 )),
             new BottomNavigationBarItem(
                 icon: new Icon(
-                  Icons.location_on,
+                  Icons.shopping_cart,
                   color:Colors.black54,
                 ),
                 title: new Text(
                   "Store",
+                  style: new TextStyle(
+                    color:Colors.black54,
+                  ),
+                )),
+            new BottomNavigationBarItem(
+                icon: new Icon(
+                  Icons.location_on,
+                  color:Colors.black54,
+                ),
+                title: new Text(
+                  "Shop",
                   style: new TextStyle(
                     color:Colors.black54,
                   ),

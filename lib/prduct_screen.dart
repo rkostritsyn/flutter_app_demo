@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_demo/dot_indicator.dart';
-import 'package:flutter_app_demo/models.dart';
+import 'package:flutter_app_demo/model/models.dart';
 
 class ProductScreen extends StatelessWidget {
   static GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -79,10 +79,7 @@ class ProductScreen extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child:  new RaisedButton(onPressed: () {
-
-
-              },
+              child:  new RaisedButton(onPressed: () => showSnackBar('This item has been added to your bag'),
                 color: Colors.red,
                 child: Container(
                 constraints: const BoxConstraints.expand(height: 45),

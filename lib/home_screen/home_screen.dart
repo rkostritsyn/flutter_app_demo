@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_demo/models.dart';
+import 'package:flutter_app_demo/model/models.dart';
 import 'package:flutter_app_demo/styles.dart';
 
 class HomeScreen extends StatelessWidget {

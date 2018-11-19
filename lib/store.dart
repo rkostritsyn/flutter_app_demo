@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_demo/models.dart';
+import 'package:flutter_app_demo/model/models.dart';
 import 'package:flutter_app_demo/product_showcase.dart';
-import 'package:flutter_app_demo/repo.dart';
+import 'package:flutter_app_demo/repo/repo.dart';
 import 'package:flutter_app_demo/styles.dart';
 import 'package:logging/logging.dart';
 
