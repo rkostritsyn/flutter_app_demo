@@ -4,7 +4,7 @@ import 'package:flutter_app_demo/bag.dart';
 import 'package:flutter_app_demo/home_screen/home_screen.dart';
 import 'package:flutter_app_demo/search.dart';
 import 'package:flutter_app_demo/shop.dart';
-import 'package:flutter_app_demo/store.dart';
+import 'package:flutter_app_demo/shop/store.dart';
 
 void main() => runApp(new MyApp());
 

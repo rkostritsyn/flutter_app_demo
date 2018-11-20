@@ -2,21 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_demo/model/models.dart';
 import 'package:flutter_app_demo/product_showcase.dart';
-import 'package:flutter_app_demo/repo/repo.dart';
+import 'package:flutter_app_demo/repo/repo_mocks.dart';
 import 'package:flutter_app_demo/styles.dart';
-import 'package:logging/logging.dart';
-
-final Logger log = new Logger('ProductShowCase');
 
 class Store extends StatelessWidget {
-
   Store(this.listType);
 
   final String listType;
 
   @override
   Widget build(BuildContext context) {
-    var categories = new Repo().getCategoriesList();
+    var categories = categoryList; //new Repo().getCategoriesList();
 
     return new Scaffold(
         body: new ListView.builder(

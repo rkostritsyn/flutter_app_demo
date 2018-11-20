@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_demo/model/models.dart';
 import 'package:flutter_app_demo/prduct_screen.dart';
 import 'package:flutter_app_demo/repo/repo.dart';
+import 'package:flutter_app_demo/repo/repo_mocks.dart';
 import 'package:flutter_app_demo/styles.dart';
 
 class ProductShowCase extends StatelessWidget {
@@ -87,7 +88,7 @@ class ProductShowCase extends StatelessWidget {
 class AllItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var products = new Repo().getProductLis();
+    var products = productList; //new Repo().getProductLis();
 
     return new Scaffold(
       body: new Container(
