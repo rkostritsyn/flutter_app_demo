@@ -4,8 +4,7 @@ import 'package:flutter_app_demo/model/models.dart';
 
 class ShopCategoryFilters {
   final performSortByPriceFromLowToHeight = StreamTransformer<List<ProductModel>, List<ProductModel>>.fromHandlers(handleData: (list, sink) {
-    //TODO: add logic
-    list.sort((a,b) => 0);
+    list.sort((a,b) => a.price - b.price );
     sink.add(list);
   });
 

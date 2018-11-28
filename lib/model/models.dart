@@ -17,10 +17,40 @@ class ProductModel {
   final String descr;
   final String priviewImagePath;
   final bool isInWishList;
-  final String price;
+  final int price;
   final List<String> imagePathList;
-  final List<String> sizes = const ['12', '13', '14', '16', '17'];
+  final List<SizeModel> sizes;
   final bool isFreePickUp = true;
 
-  const ProductModel({this.name, this.descr, this.priviewImagePath, this.isInWishList, this.price, this.imagePathList});
+  const ProductModel({
+    this.name,
+    this.descr,
+    this.priviewImagePath,
+    this.isInWishList,
+    this.price,
+    this.imagePathList,
+    this.sizes
+  });
+
+  get formatedPrice => "\$ " + price.toString();
+}
+
+class SizeModel {
+  final String sizeName;
+  final bool isAvailable;
+
+  const SizeModel({this.sizeName, this.isAvailable});
+}
+
+
+// TODO: stub model
+class BagItemModel {
+  final ProductModel product;
+  final int count;
+
+  const BagItemModel({this.product, this.count});
+
+
+  @override
+  String toString() => "${product.name} ✕ $count";
 }

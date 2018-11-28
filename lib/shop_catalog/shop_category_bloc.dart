@@ -10,17 +10,8 @@ class ShopCategoryBlock extends ShopCategoryFilters implements BaseBloc  {
 
   final _productCatalogFetcher = BehaviorSubject<List<ProductModel>>();
 
-  Observable<List<ProductModel>> get allProductList => _productCatalogFetcher.stream;
-  Observable<List<ProductModel>> get freePickUpProductList =>
-      _productCatalogFetcher.expand((it) => it)
-          .where((it)=> it.isFreePickUp)
-          .toList()
-          .asObservable();
-
-  //TODO: stub sort logic
-  Stream<List<ProductModel>> get sortProductByCostLowToHeight => _productCatalogFetcher.stream.transform(performSortByPriceFromLowToHeight);
-  Stream<List<ProductModel>> get sortProductByCostHeightToLow => _productCatalogFetcher.stream.transform(performSortByPriceFromLowToHeight);
-  Stream<List<ProductModel>> get sortProductByPopularity => _productCatalogFetcher.stream.transform(performSortByPriceFromLowToHeight);
+  Observable<List<ProductModel>> get allProductList => _productCatalogFetcher.stream.transform(performSortByPriceFromLowToHeight);
+  Stream<List<ProductModel>> get freePickUpProductList => _productCatalogFetcher.stream;
 
   fetchProductList(int shopCategoryId) async {
     var items =  await repo.fetchProductCatalog(shopCategoryId);
@@ -28,7 +19,6 @@ class ShopCategoryBlock extends ShopCategoryFilters implements BaseBloc  {
   }
 
   void sortProductList(int sortType) {
-    _productCatalogFetcher.stream.transform(performSortByPriceFromLowToHeight);
   }
 
   @override

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo/bag/bag_bloc.dart';
+import 'package:flutter_app_demo/bag/bag_provider.dart';
 import 'package:flutter_app_demo/dot_indicator.dart';
 import 'package:flutter_app_demo/model/models.dart';
 
@@ -12,6 +14,8 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var pageController = PageController();
+    final bagBloc = BagProvider.of(context);
+
     return new Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -46,7 +50,7 @@ class ProductScreen extends StatelessWidget {
             new Container(
               constraints: BoxConstraints.expand(height: 30),
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(productModel.price),
+              child: Text(productModel.formatedPrice),
             ),
 
             new Container(
@@ -58,16 +62,16 @@ class ProductScreen extends StatelessWidget {
             Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: new SingleChildScrollView(
-                  controller: new ScrollController(),
+                child: SingleChildScrollView(
+                  controller: ScrollController(),
                   scrollDirection: Axis.horizontal,
-                  child: new Row(
+                  child: Row(
                     children: <Widget>[
-                      new SizeContainer(size: 'S'),
-                      new SizeContainer(size: 'M'),
-                      new SizeContainer(size: 'L'),
-                      new SizeContainer(size: 'XL'),
-                      new SizeContainer(size: 'XXL')
+                      SizeContainer(size: 'S'),
+                      SizeContainer(size: 'M'),
+                      SizeContainer(size: 'L'),
+                      SizeContainer(size: 'XL'),
+                      SizeContainer(size: 'XXL')
                     ],
                   ),
                 )),
@@ -79,7 +83,7 @@ class ProductScreen extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child:  new RaisedButton(onPressed: () => showSnackBar('This item has been added to your bag'),
+              child:  new RaisedButton(onPressed: () => _addToBagAction(productModel, bagBloc),
                 color: Colors.red,
                 child: Container(
                 constraints: const BoxConstraints.expand(height: 45),
@@ -91,6 +95,11 @@ class ProductScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _addToBagAction(ProductModel product, BagBloc bagBloc) {
+    showSnackBar('This item has been added to your bag');
+    bagBloc.cartAddition.add(CartAddition(product));
   }
 
   void showSnackBar(String message) {

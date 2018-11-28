@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_demo/bag.dart';
+import 'package:flutter_app_demo/bag/bag.dart';
+import 'package:flutter_app_demo/bag/bag_provider.dart';
+import 'package:flutter_app_demo/bag/cart_button.dart';
 import 'package:flutter_app_demo/bloc/app_state_providers.dart';
 import 'package:flutter_app_demo/home_screen/home_screen.dart';
 import 'package:flutter_app_demo/search.dart';
-import 'package:flutter_app_demo/shop.dart';
+import 'package:flutter_app_demo/account.dart';
 import 'package:flutter_app_demo/shop/store.dart';
 
 void main() => runApp(new MyApp());
@@ -13,17 +15,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ApplicationStateProvider(child:
-     new MaterialApp(
-      title: 'Flutter Test',
-      debugShowCheckedModeBanner: false,
-      theme: new ThemeData(
-        primaryColor: Colors.red,
-        primaryColorDark: Colors.red,
-        accentColor: Colors.red,
-      ),
-      home: new DashboardScreen(title: 'Home Screen'),
-     )
+    return BagProvider(
+      child: ApplicationStateProvider(child:
+      new MaterialApp(
+        title: 'Flutter Test',
+        debugShowCheckedModeBanner: false,
+        theme: new ThemeData(
+          primaryColor: Colors.red,
+          primaryColorDark: Colors.red,
+          accentColor: Colors.red,
+        ),
+        home: new DashboardScreen(title: 'Home Screen'),
+      )
+      )
     );
   }
 }
@@ -81,8 +85,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         children: [
           new HomeScreen("Home screen"),
           new Store("Location screen"),
-          new Shop(),
           new Bag("BAG"),
+          new Account(),
+
 
         ],
         onPageChanged: onPageChanged,
@@ -111,7 +116,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 )),
             new BottomNavigationBarItem(
                 icon: new Icon(
-                  Icons.shopping_cart,
+                  Icons.shop,
                   color:Colors.black54,
                 ),
                 title: new Text(
@@ -121,10 +126,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 )),
             new BottomNavigationBarItem(
-                icon: new Icon(
-                  Icons.location_on,
-                  color:Colors.black54,
-                ),
+                icon: shoppingBagIco(context),
                 title: new Text(
                   "Shop",
                   style: new TextStyle(
@@ -147,6 +149,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
           currentIndex: _page,
         ),
       ),
+    );
+  }
+
+  Widget shoppingBagIco(BuildContext context) {
+    final bagBloc = BagProvider.of(context);
+    return StreamBuilder<int>(
+      stream: bagBloc.itemCounter,
+      initialData: bagBloc.itemCounter.value,
+      builder: (context, snapshot) => CartButton(itemCount: snapshot.data)
     );
   }
 
