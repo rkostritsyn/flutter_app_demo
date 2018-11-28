@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_demo/bag.dart';
+import 'package:flutter_app_demo/bloc/app_state_providers.dart';
 import 'package:flutter_app_demo/home_screen/home_screen.dart';
 import 'package:flutter_app_demo/search.dart';
 import 'package:flutter_app_demo/shop.dart';
@@ -9,9 +10,11 @@ import 'package:flutter_app_demo/shop/store.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return ApplicationStateProvider(child:
+     new MaterialApp(
       title: 'Flutter Test',
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.red,
       ),
       home: new DashboardScreen(title: 'Home Screen'),
-
+     )
     );
   }
 }
@@ -41,7 +44,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    _pageController = new PageController();
+    _pageController = new PageController(initialPage: 1);
   }
 
   @override

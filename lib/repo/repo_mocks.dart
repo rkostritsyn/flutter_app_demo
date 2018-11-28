@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_app_demo/model/models.dart';
 
 final productList = [

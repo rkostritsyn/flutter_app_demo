@@ -20,6 +20,7 @@ class ProductModel {
   final String price;
   final List<String> imagePathList;
   final List<String> sizes = const ['12', '13', '14', '16', '17'];
+  final bool isFreePickUp = true;
 
   const ProductModel({this.name, this.descr, this.priviewImagePath, this.isInWishList, this.price, this.imagePathList});
 }

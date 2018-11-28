@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo/bloc/app_state_providers.dart';
 import 'package:flutter_app_demo/model/models.dart';
-import 'package:flutter_app_demo/product_showcase.dart';
-import 'package:flutter_app_demo/repo/repo_mocks.dart';
+import 'package:flutter_app_demo/shop_catalog/shop_category_screen.dart';
 import 'package:flutter_app_demo/styles.dart';
 
 class Store extends StatelessWidget {
@@ -12,19 +12,34 @@ class Store extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var categories = categoryList; //new Repo().getCategoriesList();
+    final shopListBlock = ApplicationStateProvider.of(context);
+    shopListBlock.fetchShopCategoryList();
 
     return new Scaffold(
-        body: new ListView.builder(
-      itemCount: categories.length,
-      itemBuilder: (BuildContext ctx, index) {
-        return ListItemCategory(
-          category: categories[index],
-        );
-      },
-    ));
+    body: StreamBuilder(
+        stream: shopListBlock.shopCategoryList,
+        builder: (context, AsyncSnapshot<List<ShopCategoryModel>> snapshot) {
+          if (snapshot.hasData) {
+            return buildList(snapshot.data);
+          } else if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          }
+          return Center(child: CircularProgressIndicator());
+        }
+    )
+    );
   }
+
+  Widget buildList(List<ShopCategoryModel> list) =>
+      new ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (BuildContext ctx, index) {
+          return ListItemCategory(
+            category: list[index],
+          );
+        },);
 }
+
 
 class ListItemCategory extends StatelessWidget {
   final ShopCategoryModel category;
@@ -48,7 +63,7 @@ class ListItemCategory extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProductShowCase()),
+                MaterialPageRoute(builder: (context) => ShopCategoryScreen()),
               );
             },
             child: new Card(
@@ -62,4 +77,5 @@ class ListItemCategory extends StatelessWidget {
                   )),
             )));
   }
+
 }
