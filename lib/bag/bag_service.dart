@@ -20,6 +20,10 @@ class BagService {
     _updateCount(product, count);
   }
 
+  void remove(ProductModel product, [int count = -1]) {
+    _updateCount(product, count);
+  }
+
   void _updateCount(ProductModel product, int difference) {
     if (difference == 0) return;
     for (int i = 0; i < _items.length; i++) {
@@ -40,6 +44,8 @@ class BagService {
     _items.add(BagItemModel(product: product, count: max(difference, 0)));
     _notifyListeners();
   }
+
+
 
   void _notifyListeners() {
     for (final listener in _listeners) {

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_demo/bag/bag.dart';
+import 'package:flutter_app_demo/bag/bag_screen.dart';
 import 'package:flutter_app_demo/bag/bag_provider.dart';
 import 'package:flutter_app_demo/bag/cart_button.dart';
 import 'package:flutter_app_demo/bloc/app_state_providers.dart';

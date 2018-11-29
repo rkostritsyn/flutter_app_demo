@@ -31,7 +31,7 @@ class Store extends StatelessWidget {
   }
 
   Widget buildList(List<ShopCategoryModel> list) =>
-      new ListView.builder(
+      ListView.builder(
         itemCount: list.length,
         itemBuilder: (BuildContext ctx, index) {
           return ListItemCategory(

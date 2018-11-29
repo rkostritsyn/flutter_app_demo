@@ -17,7 +17,7 @@ class CartAddition {
 class BagBloc extends BaseBloc {
   final _bag = BagService();
 
-  final _bagItems = PublishSubject<List<BagItemModel>>();
+  final _bagItems = BehaviorSubject<List<BagItemModel>>(seedValue: []);
   final _itemCounter = BehaviorSubject<int>(seedValue: 0);
   final _bagAdditionController = StreamController<CartAddition>();
 
