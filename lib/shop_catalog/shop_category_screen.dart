@@ -9,6 +9,10 @@ final GlobalKey<ScaffoldState> appBarKey = new GlobalKey<ScaffoldState>();
 
 class ShopCategoryScreen extends StatelessWidget {
 
+  final ValueChanged<Map<String,Object>> onPush;
+
+  ShopCategoryScreen({this.onPush});
+
   @override
   Widget build(BuildContext context) {
     return ShopCategoryProvider(

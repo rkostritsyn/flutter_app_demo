@@ -41,14 +41,9 @@ class CartButtonState extends State<CartButton>
 
   @override
   Widget build(BuildContext context) {
-    // if (widget.itemCount == 0) {
-    //   return IconButton(
-    //     icon: Icon(Icons.shopping_cart),
-    //     onPressed: widget.onPressed,
-    //   );
-    // }
 
-    return IconButton(
+    return
+      IconButton(
         icon: Stack(
           overflow: Overflow.visible,
           children: [
@@ -78,6 +73,7 @@ class CartButtonState extends State<CartButton>
           ],
         ),
         onPressed: widget.onPressed);
+
   }
 
   @override

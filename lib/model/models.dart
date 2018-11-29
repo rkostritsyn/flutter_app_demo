@@ -38,10 +38,8 @@ class ProductModel {
 class SizeModel {
   final String sizeName;
   final bool isAvailable;
-
   const SizeModel({this.sizeName, this.isAvailable});
 }
-
 
 // TODO: stub model
 class BagItemModel {
@@ -49,7 +47,6 @@ class BagItemModel {
   final int count;
 
   const BagItemModel({this.product, this.count});
-
 
   @override
   String toString() => "${product.name} ✕ $count";

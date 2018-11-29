@@ -9,8 +9,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Material(
-      child: new Container(
+    return new Scaffold(
+      appBar: new AppBar(
+        title: Text("Home"),
+      ),
+      body: new Container(
         child: new SingleChildScrollView(
           child: new ConstrainedBox(
             constraints: new BoxConstraints(),
@@ -130,7 +133,7 @@ class OffersViewHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          new Container( child:  new Icon(Icons.ac_unit), margin: const EdgeInsets.only(right: 10),),
+          new Container( child:  new Icon(Icons.local_offer), margin: const EdgeInsets.only(right: 10),),
           new Text(
             "Offers",
             style: h1,

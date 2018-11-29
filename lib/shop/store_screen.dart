@@ -1,21 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_demo/bloc/app_state_providers.dart';
 import 'package:flutter_app_demo/model/models.dart';
+import 'package:flutter_app_demo/shop/store_provider.dart';
 import 'package:flutter_app_demo/shop_catalog/shop_category_screen.dart';
 import 'package:flutter_app_demo/styles.dart';
 
 class Store extends StatelessWidget {
-  Store(this.listType);
-
-  final String listType;
+  final ValueChanged<Map<String, Object>> onPush;
+  Store({this.onPush});
 
   @override
   Widget build(BuildContext context) {
-    final shopListBlock = ApplicationStateProvider.of(context);
+    final shopListBlock = StoreProvider.of(context);
     shopListBlock.fetchShopCategoryList();
 
     return new Scaffold(
+        appBar: AppBar(
+          title: Text('Store'),
+        ),
     body: StreamBuilder(
         stream: shopListBlock.shopCategoryList,
         builder: (context, AsyncSnapshot<List<ShopCategoryModel>> snapshot) {
@@ -37,9 +39,9 @@ class Store extends StatelessWidget {
           return ListItemCategory(
             category: list[index],
           );
-        },);
+        },
+      );
 }
-
 
 class ListItemCategory extends StatelessWidget {
   final ShopCategoryModel category;
@@ -77,5 +79,4 @@ class ListItemCategory extends StatelessWidget {
                   )),
             )));
   }
-
 }

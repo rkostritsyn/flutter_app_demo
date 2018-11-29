@@ -12,6 +12,10 @@ class Bag extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+            appBar: new AppBar(
+              title: Text("Bag"),
+            ),
+
       body: BagItemsList()
     );
   }

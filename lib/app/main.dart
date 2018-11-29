@@ -1,13 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo/app/search.dart';
+import 'package:flutter_app_demo/app/tab_navigator.dart';
 import 'package:flutter_app_demo/bag/bag_screen.dart';
 import 'package:flutter_app_demo/bag/bag_provider.dart';
 import 'package:flutter_app_demo/bag/cart_button.dart';
-import 'package:flutter_app_demo/bloc/app_state_providers.dart';
 import 'package:flutter_app_demo/home_screen/home_screen.dart';
-import 'package:flutter_app_demo/search.dart';
-import 'package:flutter_app_demo/account.dart';
-import 'package:flutter_app_demo/shop/store.dart';
+import 'package:flutter_app_demo/account/account.dart';
+import 'package:flutter_app_demo/shop/store_provider.dart';
+import 'package:flutter_app_demo/sign_in/blocs/sign_in_provider.dart';
 
 void main() => runApp(new MyApp());
 
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BagProvider(
-      child: ApplicationStateProvider(child:
+      child: StoreProvider(child:
+      SignInProvider(child:
       new MaterialApp(
         title: 'Flutter Test',
         debugShowCheckedModeBanner: false,
@@ -26,6 +28,7 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.red,
         ),
         home: new DashboardScreen(title: 'Home Screen'),
+      )
       )
       )
     );
@@ -48,7 +51,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    _pageController = new PageController(initialPage: 1);
+    _pageController = new PageController(initialPage: 3);
   }
 
   @override
@@ -72,23 +75,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        actions: <Widget>[IconButton(icon: Icon(Icons.search), onPressed:() {
-          showSearch(context: context, delegate: DataSearch());
-        })],
-        title: new Text(
-          widget.title,
-          style: new TextStyle(color:Colors.black),
-        ),
-      ),
       body: new PageView(
         children: [
-          new HomeScreen("Home screen"),
-          new Store("Location screen"),
-          new Bag("BAG"),
-          new Account(),
-
-
+          HomeScreen("Home screen"),
+          _buildShopNavigator(),
+          Bag("BAG"),
+          Account(),
         ],
         onPageChanged: onPageChanged,
         controller: _pageController,
@@ -154,77 +146,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget shoppingBagIco(BuildContext context) {
     final bagBloc = BagProvider.of(context);
-    return StreamBuilder<int>(
-      stream: bagBloc.itemCounter,
-      initialData: bagBloc.itemCounter.value,
-      builder: (context, snapshot) => CartButton(itemCount: snapshot.data)
+    return Container(
+      constraints: BoxConstraints.expand(height: 28),
+        child:
+        StreamBuilder<int>(
+            stream: bagBloc.itemCounter,
+            initialData: bagBloc.itemCounter.value,
+            builder: (context, snapshot) => CartButton(itemCount: snapshot.data)
+        ));
+  }
+
+  Widget _buildShopNavigator() {
+      return TabNavigator(
+        navigatorKey: key,
     );
   }
 
+  final key =  GlobalKey<NavigatorState>();
 }
 
-class DataSearch extends SearchDelegate<String> {
-  final brands = [
-    "Zara",
-    "Calvin Klein",
-    "Dolce & Gabbana",
-    "Giorgio Armani",
-    "Dior",
-    "Prada",
-    "Versace",
-    "Chanel"
-  ];
-
-  final popularBrands = [
-    "Giorgio Armani",
-    "Dior",
-    "Prada"
-  ];
-
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [IconButton(icon: Icon(Icons.clear), onPressed: () {
-      query = "";
-    },)
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(icon: AnimatedIcon(icon: AnimatedIcons.menu_arrow, progress: transitionAnimation), onPressed: () {
-      close(context, null);
-    });
-
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    return SearchDetail("Detail");
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    final suggestionList =
-    query.isEmpty ? popularBrands : brands.where((p) => p.startsWith(query)).toList();
-
-    return ListView.builder(itemBuilder:
-        (context, index) =>
-        ListTile(
-            onTap: () {
-              showResults(context);
-            },
-            title: RichText(text: TextSpan(
-                text: brands[index].substring(0, query.length),
-                style: TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.bold),
-                children: [TextSpan(
-                    text: brands[index].substring(query.length),
-                    style: TextStyle(color: Colors.grey)
-                )
-                ]
-            ))),
-        itemCount: suggestionList.length
-    );
-  }
-
-}
