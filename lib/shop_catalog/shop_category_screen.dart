@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_demo/model/models.dart';
 import 'package:flutter_app_demo/product_screen/prduct_screen.dart';
 import 'package:flutter_app_demo/shop_catalog/shop_category_bloc.dart';
-
 import 'package:flutter_app_demo/styles.dart';
 
 final GlobalKey<ScaffoldState> appBarKey = new GlobalKey<ScaffoldState>();
 
 class ShopCategoryScreen extends StatelessWidget {
-
   final ValueChanged<Map<String,Object>> onPush;
-
   ShopCategoryScreen({this.onPush});
 
   @override

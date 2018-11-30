@@ -1,16 +1,27 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_app_demo/app/search.dart';
 import 'package:flutter_app_demo/app/tab_navigator.dart';
+import 'package:flutter_app_demo/app/test_router.dart';
 import 'package:flutter_app_demo/bag/bag_screen.dart';
 import 'package:flutter_app_demo/bag/bag_provider.dart';
 import 'package:flutter_app_demo/bag/cart_button.dart';
 import 'package:flutter_app_demo/home_screen/home_screen.dart';
 import 'package:flutter_app_demo/account/account.dart';
+import 'package:flutter_app_demo/intro/intro_screen.dart';
 import 'package:flutter_app_demo/shop/store_provider.dart';
 import 'package:flutter_app_demo/sign_in/blocs/sign_in_provider.dart';
+import 'package:flutter_app_demo/splash/splash_screen.dart';
+import 'package:flutter_app_demo/test_dialog/test_screen.dart';
 
 void main() => runApp(new MyApp());
+
+var routes = <String, WidgetBuilder> {
+  "/home": (BuildContext context) => DashboardScreen(),
+  "/intro": (BuildContext context) => IntroScreen(),
+  "/welcome_banner": (BuildContext context) => ModalBanner()
+};
 
 class MyApp extends StatelessWidget {
 
@@ -20,14 +31,15 @@ class MyApp extends StatelessWidget {
       child: StoreProvider(child:
       SignInProvider(child:
       new MaterialApp(
-        title: 'Flutter Test',
+        title: 'Flutter app Demo',
         debugShowCheckedModeBanner: false,
         theme: new ThemeData(
           primaryColor: Colors.red,
           primaryColorDark: Colors.red,
           accentColor: Colors.red,
         ),
-        home: new DashboardScreen(title: 'Home Screen'),
+        home: SplashScreen(),
+        routes: routes,
       )
       )
       )
@@ -47,11 +59,16 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   PageController _pageController;
   int _page = 0;
+  static bool isShowed = false;
 
   @override
   void initState() {
     super.initState();
-    _pageController = new PageController(initialPage: 3);
+    _pageController = new PageController(initialPage: 0);
+    if (!isShowed) {
+      Timer(Duration(seconds: 3), () => MyNavigator.goModalBanner(context));
+      isShowed = true;
+    }
   }
 
   @override
@@ -59,7 +76,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.dispose();
     _pageController.dispose();
   }
-
 
   void navigationTapped(int page) {
     _pageController.animateToPage(page,
@@ -77,9 +93,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return new Scaffold(
       body: new PageView(
         children: [
-          HomeScreen("Home screen"),
+          HomeScreen(),
           _buildShopNavigator(),
-          Bag("BAG"),
+          Bag(),
           Account(),
         ],
         onPageChanged: onPageChanged,
@@ -93,7 +109,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ), // sets the inactive color of the `BottomNavigationBar`
         child: new BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-
           items: [
             new BottomNavigationBarItem(
                 icon: new Icon(

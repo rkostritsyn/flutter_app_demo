@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_demo/bag/bag_bloc.dart';
 import 'package:flutter_app_demo/bag/bag_provider.dart';
 import 'package:flutter_app_demo/model/models.dart';
 
 class Bag extends StatelessWidget {
-  Bag(this.listType);
-  final String listType;
 
   @override
   Widget build(BuildContext context) {

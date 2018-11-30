@@ -3,10 +3,6 @@ import 'validator.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SignInBloc extends Object with Validator {
-//  final _emailController = StreamController<
-//      String>.broadcast(); //Since we will only be dealing with string data
-//  final _passwordController = StreamController<
-//      String>.broadcast(); //A StreamController by default makes a "Single-subscription" stream.
 
   //Private fields
   final _emailController = BehaviorSubject<String>(); //RxDart's implementation of StreamController. Broadcast stream by default

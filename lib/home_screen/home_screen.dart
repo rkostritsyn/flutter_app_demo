@@ -4,8 +4,6 @@ import 'package:flutter_app_demo/model/models.dart';
 import 'package:flutter_app_demo/styles.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen(this.listType);
-  final String listType;
 
   @override
   Widget build(BuildContext context) {
