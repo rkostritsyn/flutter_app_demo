@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo/sign_in/blocs/sign_in_provider.dart';
 import 'package:flutter_app_demo/sign_in/screens/login_screen.dart';
 
 class Account extends StatelessWidget {
@@ -26,8 +27,20 @@ class UserWidget extends StatefulWidget {
 }
 
 class NonSignInState extends State<StatefulWidget> {
+  String userName = 'Hi there!';
+  String buttonName = 'SIGN IN OR CREATE ACCOUNT';
+
+  void _updateState(String login) {
+    setState(() {
+      userName = login;
+      buttonName = 'SIGN OUT';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    var signInBlock = SignInProvider.of(context);
+    signInBlock.userLogin.listen((login) => _updateState);
     return
       Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -36,7 +49,7 @@ class NonSignInState extends State<StatefulWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text('Hi there!'),
+              Text(userName),
               new RaisedButton(onPressed: () => _signIn(context),
                 color: Colors.red,
                 child: Container(

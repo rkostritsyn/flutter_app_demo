@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'sign_in_bloc.dart';
 
 class SignInProvider extends InheritedWidget {
-  final signInBloc = StateSignInBloc();
+  final signInBloc = SignInBloc();
 
   //Take the LoginScreen Widget and push it to the InheritedWidget super class
   SignInProvider({Key key, Widget child})
@@ -11,7 +11,7 @@ class SignInProvider extends InheritedWidget {
   @override
   bool updateShouldNotify(_) => true;
 
-  static StateSignInBloc of(BuildContext context) {
+  static SignInBloc of(BuildContext context) {
     return (context.inheritFromWidgetOfExactType(SignInProvider)
             as SignInProvider)
         .signInBloc;

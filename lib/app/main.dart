@@ -131,7 +131,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   color:Colors.black54,
                 ),
                 title: new Text(
-                  "Accaunt",
+                  "Account",
                   style: new TextStyle(
                     color:Colors.black54,
                   ),

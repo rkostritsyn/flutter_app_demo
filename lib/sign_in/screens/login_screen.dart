@@ -23,14 +23,19 @@ class LoginScreen extends StatelessWidget {
             SizedBox(
               height: 40.0,
             ),
-            loginButton(stateMgmtBloc),
+            Container(
+              constraints: const BoxConstraints.expand(height: 45),
+              child:
+              loginButton(stateMgmtBloc, context),
+            )
+
           ],
         ),
       ),
     );
   }
 
-  Widget emailField(StateSignInBloc stateMgmtBloc) {
+  Widget emailField(SignInBloc stateMgmtBloc) {
     return StreamBuilder(
       stream: stateMgmtBloc.emailStream,
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -50,7 +55,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget passwordField(StateSignInBloc stateMgmtBloc) {
+  Widget passwordField(SignInBloc stateMgmtBloc) {
     return StreamBuilder(
       stream: stateMgmtBloc.passwordStream,
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -67,19 +72,24 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget loginButton(StateSignInBloc stateMgmtBloc) {
+  Widget loginButton(SignInBloc stateMgmtBloc, BuildContext context) {
     return StreamBuilder(
       stream: stateMgmtBloc.submitValid,
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         return RaisedButton(
-          child: Text('Login'),
+          child: Text('LOGIN',
+              style: TextStyle(color: Colors.white)),
           color: Colors.red,
-          onPressed: snapshot.hasData
-              ? () => Navigator.pushNamed(context,
-                  "/secondscreen") //If both email and password are valid, enable login button. Navigate to second screen when user presses the login button
-              : null, //Disable the button if there is an error
+          onPressed: () => login(snapshot, context)
         );
       },
     );
   }
+
+  void login(AsyncSnapshot<dynamic> snapshot, BuildContext context) {
+    final signInBloc = SignInProvider.of(context);
+    signInBloc.successfulLogin();
+    Navigator.pop(context, []);
+  }
+
 }

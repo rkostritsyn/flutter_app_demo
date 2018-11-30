@@ -2,16 +2,17 @@ import 'dart:async';
 import 'validator.dart';
 import 'package:rxdart/rxdart.dart';
 
-class StateSignInBloc extends Object with Validator {
-  /*final _emailController = StreamController<
-      String>.broadcast(); //Since we will only be dealing with string data
-  final _passwordController = StreamController<
-      String>.broadcast(); //A StreamController by default makes a "Single-subscription" stream.
-  */
+class SignInBloc extends Object with Validator {
+//  final _emailController = StreamController<
+//      String>.broadcast(); //Since we will only be dealing with string data
+//  final _passwordController = StreamController<
+//      String>.broadcast(); //A StreamController by default makes a "Single-subscription" stream.
+
   //Private fields
-  final _emailController = BehaviorSubject<
-      String>(); //RxDart's implementation of StreamController. Broadcast stream by default
+  final _emailController = BehaviorSubject<String>(); //RxDart's implementation of StreamController. Broadcast stream by default
   final _passwordController = BehaviorSubject<String>();
+
+  final _userLoginController = BehaviorSubject<String>();
 
   //Retreive data from the stream
   Stream<String> get emailStream => _emailController.stream
@@ -27,12 +28,9 @@ class StateSignInBloc extends Object with Validator {
   Function(String) get updateEmail => _emailController.sink.add;
   Function(String) get updatePassword => _passwordController.sink.add;
 
-  /*
-  submit() {
-    final validEmail = _emailController.value;
-    final validPassword = _passwordController.value;
+  void successfulLogin() => _userLoginController.add(_emailController.value);
 
-  } */
+  ValueObservable<String> get userLogin => _userLoginController.shareValue(seedValue: 'Hi there!');
 
   dispose() {
     _emailController.close();
