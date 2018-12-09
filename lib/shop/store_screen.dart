@@ -1,19 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_demo/app/tab_navigator.dart';
 import 'package:flutter_app_demo/model/models.dart';
 import 'package:flutter_app_demo/shop/store_provider.dart';
 import 'package:flutter_app_demo/shop_catalog/shop_category_screen.dart';
 import 'package:flutter_app_demo/styles.dart';
 
 class Store extends StatelessWidget {
-  final ValueChanged<Map<String, Object>> onPush;
-  Store({this.onPush});
 
   @override
   Widget build(BuildContext context) {
     final shopListBlock = StoreProvider.of(context);
     shopListBlock.fetchShopCategoryList();
-
     return new Scaffold(
         appBar: AppBar(
           title: Text('Store'),
