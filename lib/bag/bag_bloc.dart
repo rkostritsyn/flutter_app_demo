@@ -5,12 +5,11 @@ import 'package:flutter_app_demo/bag/bag_service.dart';
 import 'package:flutter_app_demo/bloc/base_bloc.dart';
 import 'package:flutter_app_demo/model/models.dart';
 import 'package:rxdart/rxdart.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 class CartAddition {
   final ProductModel product;
   final int count;
-
   CartAddition(this.product, [this.count = 1]);
 }
 
@@ -34,6 +33,15 @@ class BagBloc extends BaseBloc {
     _bag.add(addition.product, addition.count);
     _bagItems.add(_bag.items);
     _itemCounter.add(_bag.itemCount);
+  }
+
+  void callPayPal() async {
+    const url = 'https://www.paypal.com/uk/signin';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override

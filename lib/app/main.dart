@@ -3,7 +3,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_demo/app/tab_navigator.dart';
-import 'package:flutter_app_demo/app/test_router.dart';
 import 'package:flutter_app_demo/bag/bag_screen.dart';
 import 'package:flutter_app_demo/bag/bag_provider.dart';
 import 'package:flutter_app_demo/bag/cart_button.dart';
@@ -11,11 +10,12 @@ import 'package:flutter_app_demo/home_screen/home_screen.dart';
 import 'package:flutter_app_demo/account/account.dart';
 import 'package:flutter_app_demo/intro/intro_screen.dart';
 import 'package:flutter_app_demo/shop/store_provider.dart';
+import 'package:flutter_app_demo/shop/store_screen.dart';
 import 'package:flutter_app_demo/sign_in/blocs/sign_in_provider.dart';
 import 'package:flutter_app_demo/splash/splash_screen.dart';
 import 'package:flutter_app_demo/test_dialog/test_screen.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 var routes = <String, WidgetBuilder> {
   "/home": (BuildContext context) => DashboardScreen(),
@@ -30,15 +30,15 @@ class MyApp extends StatelessWidget {
     return BagProvider(
       child: StoreProvider(child:
       SignInProvider(child:
-      new MaterialApp(
+       MaterialApp(
         title: 'Flutter app Demo',
         debugShowCheckedModeBanner: false,
-        theme: new ThemeData(
+        theme: ThemeData(
           primaryColor: Colors.red,
           primaryColorDark: Colors.red,
           accentColor: Colors.red,
         ),
-        home: SplashScreen(),
+        home: DashboardScreen(),
         routes: routes,
       )
       )
@@ -59,16 +59,11 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   PageController _pageController;
   int _page = 0;
-  static bool isShowed = false;
 
   @override
   void initState() {
     super.initState();
-    _pageController = new PageController(initialPage: 0);
-    if (!isShowed) {
-      Timer(Duration(seconds: 3), () => MyNavigator.goModalBanner(context));
-      isShowed = true;
-    }
+    _pageController = new PageController(initialPage: 3);
   }
 
   @override
@@ -90,11 +85,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new PageView(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('App demo'),
+      ),
+      body: PageView(
         children: [
           HomeScreen(),
-          _buildShopNavigator(),
+          Store(),
           Bag(),
           Account(),
         ],
