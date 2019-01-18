@@ -13,10 +13,17 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('test'),),
+      body: _heroImagePlace(),
+    );
+  }
+
+  Widget buildContent(BuildContext context) {
     var pageController = PageController();
     final bagBloc = BagProvider.of(context);
 
-    return new Scaffold(
+    new Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text(productModel.name),
@@ -32,7 +39,7 @@ class ProductScreen extends StatelessWidget {
               height: 2,
               color: Colors.black54,
             ),
-            new Container(
+            Container(
               constraints: BoxConstraints.expand(height: 300),
               child: new PageView(
                 controller: pageController,
@@ -61,7 +68,7 @@ class ProductScreen extends StatelessWidget {
 
             Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: SingleChildScrollView(
                   controller: ScrollController(),
                   scrollDirection: Axis.horizontal,
@@ -86,15 +93,31 @@ class ProductScreen extends StatelessWidget {
               child:  new RaisedButton(onPressed: () => _addToBagAction(productModel, bagBloc),
                 color: Colors.red,
                 child: Container(
-                constraints: const BoxConstraints.expand(height: 45),
-                child: Center( child: Text('ADD TO BAG', style: TextStyle(color: Colors.white),),)
-                 ),),
+                    constraints: const BoxConstraints.expand(height: 45),
+                    child: Center( child: Text('ADD TO BAG', style: TextStyle(color: Colors.white),),)
+                ),),
             )
 
           ],
         ),
       ),
     );
+  }
+
+  Widget _heroImagePlace() {
+    var decoratedBox = new DecoratedBox(
+        decoration: new BoxDecoration(
+          image: new DecorationImage(
+            fit: BoxFit.fitWidth,
+            image: AssetImage(productModel.priviewImagePath),
+          ),
+        )
+    );
+
+    return Center(child:
+    Container(
+        constraints: BoxConstraints.expand(height: 300),
+        child: Hero(tag: 'hero_product_tag', child: decoratedBox)));
   }
 
   void _addToBagAction(ProductModel product, BagBloc bagBloc) {

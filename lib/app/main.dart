@@ -1,6 +1,4 @@
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app_demo/app/tab_navigator.dart';
 import 'package:flutter_app_demo/bag/bag_screen.dart';
@@ -10,9 +8,7 @@ import 'package:flutter_app_demo/home_screen/home_screen.dart';
 import 'package:flutter_app_demo/account/account.dart';
 import 'package:flutter_app_demo/intro/intro_screen.dart';
 import 'package:flutter_app_demo/shop/store_provider.dart';
-import 'package:flutter_app_demo/shop/store_screen.dart';
 import 'package:flutter_app_demo/sign_in/blocs/sign_in_provider.dart';
-import 'package:flutter_app_demo/splash/splash_screen.dart';
 import 'package:flutter_app_demo/test_dialog/test_screen.dart';
 
 void main() => runApp(MyApp());
@@ -31,6 +27,7 @@ class MyApp extends StatelessWidget {
       child: StoreProvider(child:
       SignInProvider(child:
        MaterialApp(
+
         title: 'Flutter app Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -63,7 +60,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    _pageController = new PageController(initialPage: 3);
+    _pageController = new PageController(initialPage: 0);
   }
 
   @override
@@ -86,13 +83,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('App demo'),
-      ),
+
+//      appBar: AppBar(
+//        title: Text('App demo'),
+//      ),
       body: PageView(
         children: [
           HomeScreen(),
-          Store(),
+          _buildShopNavigator(),
           Bag(),
           Account(),
         ],
@@ -100,7 +98,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         controller: _pageController,
       ),
       bottomNavigationBar: new Theme(
-
         data: Theme.of(context).copyWith(
           // sets the background color of the `BottomNavigationBar`
           canvasColor: Colors.white,

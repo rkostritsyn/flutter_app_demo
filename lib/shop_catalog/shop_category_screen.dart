@@ -4,7 +4,7 @@ import 'package:flutter_app_demo/product_screen/prduct_screen.dart';
 import 'package:flutter_app_demo/shop_catalog/shop_category_bloc.dart';
 import 'package:flutter_app_demo/styles.dart';
 
-final GlobalKey<ScaffoldState> appBarKey = new GlobalKey<ScaffoldState>();
+final GlobalKey<ScaffoldState> appBarKey = GlobalKey<ScaffoldState>();
 
 class ShopCategoryScreen extends StatelessWidget {
   final ValueChanged<Map<String,Object>> onPush;
@@ -18,7 +18,7 @@ class ShopCategoryScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             bottom: PreferredSize(
-                child: new Column(
+                child: Column(
                   children: <Widget>[
                     ShopTabBar(key: appBarKey),
                     ShopCategoryTabBar()
@@ -83,12 +83,12 @@ class ShopCategoryTabBar extends StatelessWidget {
     return Container(
         constraints: BoxConstraints.expand(height: 48),
         margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: new Row(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            new Container(
+            Container(
               child: SortTypeMenu(),
               margin: const EdgeInsets.symmetric(horizontal: 20),
             ),
@@ -160,7 +160,7 @@ class AllItems extends StatelessWidget {
   Widget build(BuildContext context) {
     var shopCategoryBlock = ShopCategoryProvider.of(context);
 
-    return new StreamBuilder(
+    return StreamBuilder(
         stream: shopCategoryBlock.allProductList,
         builder: (context, AsyncSnapshot<List<ProductModel>> snapshot) {
           if (snapshot.hasData) {
@@ -193,7 +193,7 @@ class FreePickUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var shopCategoryBlock = ShopCategoryProvider.of(context);
-    return new StreamBuilder(
+    return StreamBuilder(
         stream: shopCategoryBlock.freePickUpProductList,
         builder: (context, AsyncSnapshot<List<ProductModel>> snapshot) {
           if (snapshot.hasData) {
@@ -224,12 +224,11 @@ class FreePickUp extends StatelessWidget {
 
 class ProductPreviewItem extends StatelessWidget {
   final ProductModel productPreview;
-
   const ProductPreviewItem({this.productPreview});
 
   @override
   Widget build(BuildContext context) {
-    var categoryAsset = new AssetImage(productPreview.priviewImagePath);
+    var categoryAsset = AssetImage(productPreview.priviewImagePath);
     return Container(
         child: new GestureDetector(
             onTap: () {
@@ -243,20 +242,42 @@ class ProductPreviewItem extends StatelessWidget {
             },
             child: new Column(
               children: <Widget>[
+                heroAnimation(context),
+//                Container(
+//                  child: Image(image: categoryAsset),
+//                  constraints: BoxConstraints.expand(height: 150),
+//                ),
                 Container(
-                  child: Image(image: categoryAsset),
-                  constraints: BoxConstraints.expand(height: 150),
-                ),
-                new Container(
                   child: Text(productPreview.formatedPrice),
                 ),
-                new Text(
+                Text(
                   productPreview.name,
                   style: h1,
                 ),
-                new Text(productPreview.descr)
+                Text(productPreview.descr)
               ],
             )));
+  }
+  
+  Widget heroAnimation(BuildContext context) {
+    var categoryAsset = AssetImage(productPreview.priviewImagePath);
+    var imageContainer = Container(
+      child: Image(image: categoryAsset),
+      constraints: BoxConstraints.expand(height: 150),
+    );
+    
+    return Hero(tag: 'hero_product_tag', child: imageContainer);
+  }
+  
+
+  void _showProductDetail(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ProductScreen(
+            productModel: productPreview,
+          )),
+    );
   }
 }
 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_demo/shop/store_screen.dart';
 import 'package:flutter_app_demo/shop_catalog/shop_category_screen.dart';
 
+// SPIKE KLASS
+
 class TabNavigatorRoutes {
   static const String root = '/';
   static const String catalog = '/shop_catalog';
@@ -15,7 +17,7 @@ class TabNavigator extends StatelessWidget {
 
   Map<String, WidgetBuilder> _routerBuilders(BuildContext context) =>
       {
-        TabNavigatorRoutes.root: (context) => Store(onPush: (args) => _pushCatalog(context)),
+        TabNavigatorRoutes.root: (context) => Store(),
         TabNavigatorRoutes.catalog: (context) => ShopCategoryScreen(onPush: (args) {}),
       };
 
@@ -32,15 +34,34 @@ class TabNavigator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var routeBuilders = _routerBuilders(context);
+//    var routeBuilders = _routerBuilders(context);
 
     return Navigator(
         key: navigatorKey,
         initialRoute: TabNavigatorRoutes.root,
         onGenerateRoute: (routeSettings) {
-          return MaterialPageRoute(
-
-              builder: (context) => routeBuilders[routeSettings.name](context));
+          return SlideRightRoute(widget: Store());
+//          return MaterialPageRoute(
+//              builder: (context) => routeBuilders[routeSettings.name](context));
         });
   }
+}
+
+class SlideRightRoute extends PageRouteBuilder {
+  final Widget widget;
+  SlideRightRoute({this.widget})
+      : super(
+      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+        return widget;
+      },
+      transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+        return new SlideTransition(
+          position: new Tween<Offset>(
+            begin: const Offset(0.0, 0.0),
+            end: Offset.zero,
+          ).animate(animation),
+          child: child,
+        );
+      }
+  );
 }

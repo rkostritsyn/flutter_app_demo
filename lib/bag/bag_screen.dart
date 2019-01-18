@@ -11,6 +11,9 @@ class Bag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: new AppBar(
+        title: Text("Account"),
+      ),
       body: BagItemsList(),
     );
   }
@@ -121,32 +124,6 @@ class SizeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return null;
   }
-
-}
-
-class SizePainter extends CustomPainter {
-  final width;
-  final height;
-  SizePainter({this.width, this.height});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint line = new Paint()
-      ..color = Colors.grey
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-    
-//    canvas.drawRect(rect, paint)
-
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return null;
-  }
-
-
 }
 
 class CheckoutBtn extends StatelessWidget {
